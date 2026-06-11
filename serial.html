@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Unmanned Aircraft Serial Number — Volador VX3.5 Custom</title>
+<style>
+  @page { size: A4; margin: 16mm; }
+  :root{
+    --ink:#15191e; --muted:#5b6670; --line:#e3e7eb; --accent:#b4232a; --accent2:#0e2a47; --chip:#f4f6f8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Inter","Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--ink);font-size:13px;line-height:1.55;background:#fff;-webkit-font-smoothing:antialiased;
+  }
+  .doc{max-width:860px;margin:0 auto;padding:34px 40px;}
+
+  .top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+       padding-bottom:14px;border-bottom:2px solid var(--ink);}
+  .top .lead{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .top h1{margin:0;font-size:24px;letter-spacing:-.3px;font-weight:800;line-height:1.05;}
+  .top h1 span{color:var(--accent);}
+  .top .model{font-size:12px;color:var(--muted);margin-top:4px;}
+  .docref{text-align:right;font-size:10px;color:var(--muted);letter-spacing:.5px;}
+
+  .serialblock{margin:34px 0 10px;border:1px solid var(--line);border-radius:14px;
+    background:linear-gradient(180deg,#fbfcfd,#f4f6f8);padding:28px 24px;text-align:center;}
+  .serialblock .lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+  .serialblock .num{font-family:"SFMono-Regular",Consolas,monospace;font-size:46px;font-weight:700;
+    letter-spacing:6px;color:var(--accent2);margin:8px 0 4px;}
+  .serialblock .where{font-size:12px;color:var(--muted);}
+
+  figure{margin:22px 0 8px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--chip);}
+  figure img{display:block;width:100%;height:360px;object-fit:contain;background:#0e1216;}
+  figure figcaption{font-size:11px;color:var(--muted);padding:9px 14px;border-top:1px solid var(--line);text-align:center;}
+
+  table{width:100%;border-collapse:collapse;margin-top:18px;}
+  td{padding:8px 6px;border-bottom:1px solid var(--line);}
+  td.k{width:34%;color:var(--muted);font-weight:600;}
+
+  .declare{margin-top:20px;border-left:3px solid var(--accent);background:var(--chip);
+           border-radius:0 6px 6px 0;padding:12px 16px;font-size:12px;color:#2a3138;}
+
+  .foot{margin-top:26px;padding-top:10px;border-top:1px solid var(--line);
+        display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);letter-spacing:.4px;}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="top">
+    <div>
+      <div class="lead">Unmanned Aircraft &middot; Serial Number Record</div>
+      <h1>Volador VX3.5 <span>Custom</span></h1>
+      <div class="model">3.5 inch first person view quadcopter &middot; custom assembled</div>
+    </div>
+    <div class="docref">Doc ref<br>UAS-SN-D93VXW2332</div>
+  </div>
+
+  <div class="serialblock">
+    <div class="lbl">Airframe Serial Number</div>
+    <div class="num">D93VXW2332</div>
+    <div class="where">Permanently marked on the underside of the airframe</div>
+  </div>
+
+  <figure>
+    <img src="drone-bottom.jpg" alt="Underside of airframe showing serial number D93VXW2332">
+    <figcaption>Serial number D93VXW2332 as marked on the underside centre plate of the aircraft</figcaption>
+  </figure>
+
+  <table>
+    <tr><td class="k">Aircraft model</td><td>FlyFishRC Volador VX3.5 (custom build)</td></tr>
+    <tr><td class="k">Serial number</td><td>D93VXW2332</td></tr>
+    <tr><td class="k">Operator</td><td>Shahzeb Ali</td></tr>
+    <tr><td class="k">Takeoff weight</td><td>0.35 kg</td></tr>
+    <tr><td class="k">Date</td><td>11 / 06 / 2026</td></tr>
+  </table>
+
+  <div class="declare">
+    As this unmanned aircraft was custom assembled rather than supplied as a finished product, the serial
+    number above was applied to the airframe by the operator and is used to identify the aircraft for
+    registration. The number is permanently marked on the underside of the frame, as shown in the photograph.
+  </div>
+
+  <div class="foot">
+    <span>Doc ref UAS-SN-D93VXW2332</span>
+    <span>Volador VX3.5 custom build &middot; serial number record</span>
+    <span>Issued 11 / 06 / 2026</span>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('img').forEach(function(img){
+    function fb(){
+      var d=document.createElement('div');
+      d.textContent=(img.alt||'Photo')+' — add photo file';
+      d.style.cssText='width:100%;min-height:360px;display:flex;align-items:center;justify-content:center;color:#9aa6b1;font-size:12px;text-align:center;padding:0 14px;background:repeating-linear-gradient(45deg,#f1f4f7,#f1f4f7 10px,#e9edf1 10px,#e9edf1 20px);';
+      if(img.parentNode){img.replaceWith(d);}
+    }
+    img.onerror=fb;
+    if(img.complete && img.naturalWidth===0){fb();}
+  });
+</script>
+</body>
+</html>
