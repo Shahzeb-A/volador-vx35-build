@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aircraft Build Specification — Volador VX3.5 Custom</title>
+<style>
+  @page { size: A4; margin: 14mm; }
+  :root{
+    --ink:#15191e; --muted:#5b6670; --line:#e3e7eb; --accent:#b4232a; --accent2:#0e2a47;
+    --chip:#f4f6f8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Inter","Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--ink); font-size:12.5px; line-height:1.5; background:#fff;
+    -webkit-font-smoothing:antialiased;
+  }
+  .doc{max-width:860px;margin:0 auto;padding:30px 38px 44px;}
+
+  /* header */
+  .top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+       padding-bottom:14px;border-bottom:2px solid var(--ink);}
+  .top .lead{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .top h1{margin:0;font-size:25px;letter-spacing:-.3px;font-weight:800;line-height:1.05;}
+  .top h1 span{color:var(--accent);}
+  .top .model{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  .serialcard{
+    text-align:right;min-width:190px;
+    border:1px solid var(--line);border-radius:9px;padding:10px 14px;background:var(--chip);
+  }
+  .serialcard .lbl{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+  .serialcard .num{font-family:"SFMono-Regular",Consolas,monospace;font-size:19px;font-weight:700;letter-spacing:1px;color:var(--accent2);margin-top:2px;}
+  .serialcard .small{font-size:10px;color:var(--muted);margin-top:5px;}
+
+  .metarow{display:flex;gap:0;margin-top:14px;border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .metarow div{flex:1;padding:8px 12px;border-right:1px solid var(--line);}
+  .metarow div:last-child{border-right:none;}
+  .metarow .k{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+  .metarow .v{font-size:12px;font-weight:600;margin-top:2px;}
+
+  h2{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent2);
+     margin:24px 0 9px;display:flex;align-items:center;gap:10px;}
+  h2::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  table{width:100%;border-collapse:collapse;}
+  td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top;}
+  td.k{width:34%;color:var(--muted);font-weight:600;}
+  td.v{color:var(--ink);}
+  .two{display:flex;gap:30px;}
+  .two>div{flex:1;}
+
+  .edit{background:#fff3cf;padding:0 4px;border-radius:3px;}
+
+  /* photo grid */
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
+  .gallery figure{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--chip);}
+  .gallery img{display:block;width:100%;height:175px;object-fit:cover;}
+  .gallery figcaption{font-size:10px;color:var(--muted);padding:6px 9px;border-top:1px solid var(--line);}
+  .ph{height:175px;display:flex;align-items:center;justify-content:center;color:#9aa6b1;font-size:11px;text-align:center;padding:0 14px;}
+
+  .declare{margin-top:22px;border-left:3px solid var(--accent);background:var(--chip);
+           border-radius:0 6px 6px 0;padding:12px 16px;font-size:11.5px;color:#2a3138;}
+
+  .foot{margin-top:26px;padding-top:10px;border-top:1px solid var(--line);
+        display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);letter-spacing:.4px;}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <div class="top">
+    <div>
+      <div class="lead">Unmanned Aircraft &middot; Build Specification</div>
+      <h1>Volador VX3.5 <span>Custom</span></h1>
+      <div class="model">3.5 inch first person view quadcopter &middot; custom assembled</div>
+    </div>
+    <div class="serialcard">
+      <div class="lbl">Airframe Serial</div>
+      <div class="num">D93VXW2332</div>
+      <div class="small">Marked on underside of frame</div>
+    </div>
+  </div>
+
+  <div class="metarow">
+    <div><div class="k">Operator</div><div class="v"><span class="edit">[Your full name]</span></div></div>
+    <div><div class="k">Category</div><div class="v">Small UAS &middot; recreational</div></div>
+    <div><div class="k">Takeoff weight</div><div class="v">0.35 kg</div></div>
+    <div><div class="k">Document date</div><div class="v"><span class="edit">[DD / MM / 2026]</span></div></div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2>Aircraft identification</h2>
+      <table>
+        <tr><td class="k">Type</td><td class="v">Multirotor (quadcopter)</td></tr>
+        <tr><td class="k">Configuration</td><td class="v">Quad X, custom build</td></tr>
+        <tr><td class="k">Airframe make</td><td class="v">FlyFishRC</td></tr>
+        <tr><td class="k">Airframe model</td><td class="v">Volador VX3.5</td></tr>
+        <tr><td class="k">Manufacturer ref</td><td class="v">flyfish-rc.com</td></tr>
+        <tr><td class="k">Serial number</td><td class="v">D93VXW2332</td></tr>
+      </table>
+
+      <h2>Airframe &amp; structure</h2>
+      <table>
+        <tr><td class="k">Frame material</td><td class="v">Carbon fibre, squashed X</td></tr>
+        <tr><td class="k">Wheelbase</td><td class="v">160 mm</td></tr>
+        <tr><td class="k">Overall size</td><td class="v">127.5 mm &times; 148 mm</td></tr>
+        <tr><td class="k">Frame weight (bare)</td><td class="v">70.5 g</td></tr>
+        <tr><td class="k">Arm protection</td><td class="v">TPU motor guards</td></tr>
+      </table>
+
+      <h2>Propulsion</h2>
+      <table>
+        <tr><td class="k">Motors</td><td class="v">1804 brushless &times; 4 (RaceDayQuads Flash)</td></tr>
+        <tr><td class="k">Propellers</td><td class="v">3.5 inch, tri blade</td></tr>
+        <tr><td class="k">ESC</td><td class="v">4 in 1, integrated in stack</td></tr>
+      </table>
+    </div>
+
+    <div>
+      <h2>Avionics &amp; control</h2>
+      <table>
+        <tr><td class="k">Stack</td><td class="v">SpeedyBee style mini flight stack</td></tr>
+        <tr><td class="k">Flight controller</td><td class="v">F4 class, Betaflight</td></tr>
+        <tr><td class="k">Control link</td><td class="v">2.4 GHz, line of sight</td></tr>
+        <tr><td class="k">Failsafe</td><td class="v">Motors off on signal loss</td></tr>
+      </table>
+
+      <h2>Video &amp; payload</h2>
+      <table>
+        <tr><td class="k">FPV video</td><td class="v">Analog VTX, 5.8 GHz, with antenna</td></tr>
+        <tr><td class="k">Onboard camera</td><td class="v">BetaFPV &times; Insta360 action camera</td></tr>
+        <tr><td class="k">Use</td><td class="v">Recreational FPV / aerial footage</td></tr>
+      </table>
+
+      <h2>Power</h2>
+      <table>
+        <tr><td class="k">Battery</td><td class="v">Lithium polymer, 4S <span class="edit">[850 mAh]</span></td></tr>
+        <tr><td class="k">Connector</td><td class="v">XT60</td></tr>
+        <tr><td class="k">Charging</td><td class="v">Balanced LiPo charger</td></tr>
+      </table>
+
+      <h2>Operating parameters</h2>
+      <table>
+        <tr><td class="k">Max speed (approx)</td><td class="v">~110 km/h</td></tr>
+        <tr><td class="k">Endurance (approx)</td><td class="v">4 to 6 minutes</td></tr>
+        <tr><td class="k">Max altitude</td><td class="v">120 m AGL (per GACA limit)</td></tr>
+        <tr><td class="k">Operation</td><td class="v">Visual line of sight, daylight</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>Photographic record</h2>
+  <div class="gallery">
+    <figure><img src="drone-front.jpg" alt="Front view"><figcaption>Front &middot; camera and power lead</figcaption></figure>
+    <figure><img src="drone-bottom.jpg" alt="Underside with serial"><figcaption>Underside &middot; serial D93VXW2332</figcaption></figure>
+    <figure><img src="drone-side1.jpg" alt="Side view"><figcaption>Side &middot; arm and motor detail</figcaption></figure>
+    <figure><img src="drone-side2.jpg" alt="Side view"><figcaption>Side &middot; stack and antenna</figcaption></figure>
+  </div>
+
+  <div class="declare">
+    This unmanned aircraft was assembled by the operator from commercially available components, using
+    the FlyFishRC Volador VX3.5 as the airframe. As it was custom built rather than supplied as a finished
+    product, the serial number above was applied to the airframe by the operator and is used for
+    registration and identification. All details on this sheet reflect the actual aircraft and are accurate
+    to the best of the operator's knowledge.
+  </div>
+
+  <div class="foot">
+    <span>Doc ref UAS-BS-D93VXW2332</span>
+    <span>Volador VX3.5 custom build &middot; aircraft specification</span>
+    <span>Page 1 of 1</span>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('img').forEach(function(img){
+    function fb(){
+      var d=document.createElement('div');
+      d.textContent=(img.alt||'Photo')+' — add photo file';
+      d.style.cssText='width:100%;min-height:175px;display:flex;align-items:center;justify-content:center;color:#9aa6b1;font-size:11px;text-align:center;padding:0 14px;background:repeating-linear-gradient(45deg,#f1f4f7,#f1f4f7 10px,#e9edf1 10px,#e9edf1 20px);';
+      if(img.parentNode){img.replaceWith(d);}
+    }
+    img.onerror=fb;
+    if(img.complete && img.naturalWidth===0){fb();}
+  });
+</script>
+</body>
+</html>

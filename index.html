@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volador VX3.5 Custom — FPV Build Record</title>
+<style>
+  :root{
+    --bg:#0d0f12; --panel:#14181d; --panel2:#1b2027; --line:#262d36;
+    --ink:#eef1f4; --muted:#9aa6b2; --accent:#e23b42; --accent2:#37d0c4; --chip:#1f2630;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Inter","Segoe UI",Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px;}
+  .mono{font-family:"SFMono-Regular",Consolas,ui-monospace,monospace;}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+      background:rgba(13,15,18,.82);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;}
+  nav .brand{font-weight:800;letter-spacing:.2px;font-size:15px;}
+  nav .brand b{color:var(--accent);}
+  nav .sn{font-size:12px;color:var(--muted);letter-spacing:1px;}
+  nav .links{display:flex;gap:22px;font-size:13px;color:var(--muted);}
+  nav .links a:hover{color:var(--ink);}
+  @media(max-width:680px){nav .links{display:none;}}
+
+  /* hero */
+  header.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+    background:radial-gradient(1200px 500px at 70% -10%, #1a2230 0%, var(--bg) 60%);}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
+    padding:64px 22px 60px;}
+  .tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--accent2);border:1px solid var(--line);
+    padding:5px 12px;border-radius:30px;background:var(--panel);}
+  .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--accent2);}
+  h1.title{font-size:50px;line-height:1.02;letter-spacing:-1.4px;font-weight:800;margin:18px 0 14px;}
+  h1.title span{color:var(--accent);}
+  .sub{color:var(--muted);font-size:16px;max-width:430px;}
+  .snbadge{margin-top:24px;display:inline-flex;flex-direction:column;gap:2px;
+    border:1px solid var(--line);border-left:3px solid var(--accent);
+    background:var(--panel);border-radius:0 10px 10px 0;padding:10px 18px;}
+  .snbadge .l{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+  .snbadge .n{font-size:22px;font-weight:700;letter-spacing:1.5px;}
+  .heroimg{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.7);}
+  .heroimg img{display:block;width:100%;height:360px;object-fit:cover;}
+  .heroimg .ph{height:360px;display:flex;align-items:center;justify-content:center;
+    color:#5e6b78;font-size:13px;text-align:center;padding:0 30px;}
+  @media(max-width:780px){
+    .hero .wrap{grid-template-columns:1fr;gap:26px;padding:44px 22px;}
+    h1.title{font-size:38px;}
+  }
+
+  /* spec strip */
+  .strip{border-bottom:1px solid var(--line);background:var(--panel);}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
+  .strip .cell{padding:20px 18px;border-right:1px solid var(--line);}
+  .strip .cell:last-child{border-right:none;}
+  .strip .k{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+  .strip .v{font-size:21px;font-weight:700;margin-top:5px;}
+  @media(max-width:680px){.strip .wrap{grid-template-columns:1fr 1fr;}
+    .strip .cell:nth-child(2){border-right:none;}
+    .strip .cell:nth-child(1),.strip .cell:nth-child(2){border-bottom:1px solid var(--line);}}
+
+  section{padding:58px 0;border-bottom:1px solid var(--line);}
+  .eyebrow{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+  h2{font-size:28px;letter-spacing:-.5px;font-weight:800;margin-bottom:8px;}
+  .lede{color:var(--muted);max-width:640px;margin-bottom:26px;}
+
+  /* spec table */
+  .specgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 48px;}
+  .specgrid .row{display:flex;justify-content:space-between;gap:16px;
+    padding:11px 0;border-bottom:1px solid var(--line);}
+  .specgrid .row .k{color:var(--muted);}
+  .specgrid .row .v{font-weight:600;text-align:right;}
+  @media(max-width:680px){.specgrid{grid-template-columns:1fr;}}
+
+  /* gallery */
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);}
+  .card img{display:block;width:100%;height:280px;object-fit:cover;}
+  .card .ph{height:280px;display:flex;align-items:center;justify-content:center;color:#5e6b78;font-size:12px;text-align:center;padding:0 24px;}
+  .card .cap{padding:12px 16px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);}
+  @media(max-width:680px){.grid4{grid-template-columns:1fr;} .card img,.card .ph{height:240px;}}
+
+  /* build notes */
+  .notes{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:start;}
+  .notes p{color:#c4ccd4;margin-bottom:15px;}
+  .panel{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:22px;}
+  .panel h3{font-size:14px;margin-bottom:14px;letter-spacing:.3px;}
+  .panel .li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
+  .panel .li:last-child{border-bottom:none;}
+  .panel .li .m{color:var(--muted);}
+  @media(max-width:680px){.notes{grid-template-columns:1fr;}}
+
+  footer{padding:34px 0 50px;color:var(--muted);font-size:12.5px;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .note{font-size:12px;color:#6f7b87;max-width:520px;line-height:1.5;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">VOLADOR <b>VX3.5</b> · Custom</div>
+    <div class="links">
+      <a href="#specs">Specifications</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#build">Build</a>
+    </div>
+    <div class="sn mono">SN D93VXW2332</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="tag"><span class="dot"></span> Custom FPV Quadcopter</span>
+      <h1 class="title">Volador <span>VX3.5</span><br>Custom Build</h1>
+      <p class="sub">A 3.5 inch first person view quadcopter built on the FlyFishRC Volador VX3.5 airframe.
+      This page is the operator's build record for registration and identification.</p>
+      <div class="snbadge">
+        <span class="l">Airframe serial</span>
+        <span class="n mono">D93VXW2332</span>
+      </div>
+    </div>
+    <div class="heroimg">
+      <img src="drone-front.jpg" alt="Front view of the custom Volador VX3.5">
+      <!-- if image missing, this shows nothing; keep drone-front.jpg in same folder -->
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="cell"><div class="k">Class</div><div class="v">3.5 inch</div></div>
+    <div class="cell"><div class="k">Takeoff weight</div><div class="v">0.35 kg</div></div>
+    <div class="cell"><div class="k">Wheelbase</div><div class="v">160 mm</div></div>
+    <div class="cell"><div class="k">Power</div><div class="v">4S</div></div>
+  </div>
+</div>
+
+<section id="specs">
+  <div class="wrap">
+    <div class="eyebrow">Technical data</div>
+    <h2>Full specification</h2>
+    <p class="lede">Every value below reflects the actual aircraft as photographed. The airframe is a stock
+    FlyFishRC Volador VX3.5; the rest of the build is assembled from standard FPV components.</p>
+    <div class="specgrid">
+      <div class="row"><span class="k">Aircraft type</span><span class="v">Quadcopter, multirotor</span></div>
+      <div class="row"><span class="k">Airframe</span><span class="v">FlyFishRC Volador VX3.5</span></div>
+      <div class="row"><span class="k">Frame material</span><span class="v">Carbon fibre, squashed X</span></div>
+      <div class="row"><span class="k">Motors</span><span class="v">1804 × 4 (RDQ Flash)</span></div>
+      <div class="row"><span class="k">Propellers</span><span class="v">3.5 inch, tri blade</span></div>
+      <div class="row"><span class="k">Flight stack</span><span class="v">SpeedyBee style mini stack</span></div>
+      <div class="row"><span class="k">ESC</span><span class="v">4 in 1, integrated</span></div>
+      <div class="row"><span class="k">Control link</span><span class="v">2.4 GHz, line of sight</span></div>
+      <div class="row"><span class="k">FPV video</span><span class="v">Analog VTX, 5.8 GHz</span></div>
+      <div class="row"><span class="k">Onboard camera</span><span class="v">BetaFPV × Insta360</span></div>
+      <div class="row"><span class="k">Battery</span><span class="v">4S LiPo, XT60</span></div>
+      <div class="row"><span class="k">Takeoff weight</span><span class="v">0.35 kg</span></div>
+      <div class="row"><span class="k">Wheelbase</span><span class="v">160 mm</span></div>
+      <div class="row"><span class="k">Serial number</span><span class="v mono">D93VXW2332</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="eyebrow">Photographic record</div>
+    <h2>The aircraft</h2>
+    <p class="lede">Front, underside and both sides. The serial number is marked on the underside plate.</p>
+    <div class="grid4">
+      <div class="card"><img src="drone-front.jpg" alt="Front"><div class="cap">Front — camera, VTX antenna and 4S power lead</div></div>
+      <div class="card"><img src="drone-bottom.jpg" alt="Underside"><div class="cap">Underside — serial D93VXW2332 on the centre plate</div></div>
+      <div class="card"><img src="drone-side1.jpg" alt="Side"><div class="cap">Side — arm, 1804 motor and TPU guard</div></div>
+      <div class="card"><img src="drone-side2.jpg" alt="Side"><div class="cap">Side — flight stack and antenna routing</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <div class="eyebrow">Build record</div>
+    <h2>About this build</h2>
+    <div class="notes">
+      <div>
+        <p>This is a custom assembled 3.5 inch FPV quadcopter built on the FlyFishRC Volador VX3.5 airframe.
+        It was put together by the operator from off the shelf parts rather than bought as a finished drone,
+        which is why it carries an operator applied serial number for registration.</p>
+        <p>The platform pairs 1804 motors on 3.5 inch tri blade propellers with a SpeedyBee style mini stack
+        running Betaflight, fed by a 4S lithium polymer pack through an XT60 lead. Video is handled by an
+        analog 5.8 GHz transmitter, with a BetaFPV × Insta360 action camera carried on top for recorded
+        footage. It is flown within visual line of sight for recreation and aerial filming.</p>
+        <p>All specifications and photographs on this page describe the actual aircraft and are kept here as
+        a build and registration record.</p>
+      </div>
+      <div class="panel">
+        <h3>At a glance</h3>
+        <div class="li"><span class="m">Model</span><span>Volador VX3.5</span></div>
+        <div class="li"><span class="m">Serial</span><span class="mono">D93VXW2332</span></div>
+        <div class="li"><span class="m">Weight</span><span>0.35 kg</span></div>
+        <div class="li"><span class="m">Battery</span><span>4S LiPo</span></div>
+        <div class="li"><span class="m">Class</span><span>Small UAS</span></div>
+        <div class="li"><span class="m">Use</span><span>Recreational</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="font-weight:700;color:var(--ink);margin-bottom:6px;">Volador VX3.5 · Custom build record</div>
+      <div class="note">Custom assembled unmanned aircraft. Airframe by FlyFishRC (flyfish-rc.com). Serial
+      D93VXW2332 applied by the operator. This page documents one specific aircraft for registration and
+      identification.</div>
+    </div>
+    <div class="mono">SN D93VXW2332</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('img').forEach(function(img){
+    function fb(){
+      var d=document.createElement('div');
+      d.textContent=(img.alt||'Photo')+' — add photo file';
+      d.style.cssText='width:100%;min-height:280px;display:flex;align-items:center;justify-content:center;color:#5e6b78;font-size:13px;text-align:center;padding:0 20px;background:repeating-linear-gradient(45deg,#161b21,#161b21 12px,#12161b 12px,#12161b 24px);';
+      if(img.parentNode){img.replaceWith(d);}
+    }
+    img.onerror=fb;
+    if(img.complete && img.naturalWidth===0){fb();}
+  });
+</script>
+
+</body>
+</html>
